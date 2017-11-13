@@ -13,31 +13,21 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Anno-Community</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <!--            <li class="active"><a href="#">Home</a></li>-->
-            <!--            <li><a href="#">Page 2</a></li>-->
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span></a></li>
-        </ul>
-    </div>
-</nav>
+@include('templates.navbar')
 
 
 <div class="form-signin vertical-center">
     <div class="container">
+
+        @include('templates.errors')
+
         <div class="panel panel-default">
             <div class="panel-heading">Welcome back!</div>
             <div class="panel-body">
                 <form action="{{ url('/join') }}">
                     <label>Join community</label>
                     <div class="input-group">
-                        <input type="text" name="community" class="form-control" placeholder="Invite code">
+                        <input type="text" name="invite" class="form-control" placeholder="Invite code">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit">
                                 <i class="glyphicon glyphicon-plus"></i>
@@ -46,10 +36,11 @@
                     </div>
                 </form>
                 <hr/>
-                <form>
+                <form action="{{ url('/restore') }}" method="post">
+                    {{ csrf_field() }}
                     <label>Resume session</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" name="resume" placeholder="Session code">
+                        <input type="text" class="form-control" name="code" placeholder="Session code">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit">
                                 <i class="glyphicon glyphicon-log-in"></i>
@@ -63,10 +54,11 @@
         <div class="panel panel-default">
             <div class="panel-heading">Create community</div>
             <div class="panel-body">
-                <form>
+                <form action="{{ url('/create') }}" method="post">
+                    {{ csrf_field() }}
                     <label>Create community</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Community name">
+                        <input type="text" name="name" class="form-control" placeholder="Community name">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit">
                                 <i class="glyphicon glyphicon-plus"></i>
